@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Aquarela · duas opções de site</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    @font-face { font-family: 'Fredoka'; font-weight: 500 700; font-display: swap; src: url(loja-vitrine/assets/fonts/fredoka-2.woff2) format('woff2'); }
+    @font-face { font-family: 'Nunito Sans'; font-weight: 400 800; font-display: swap; src: url(loja-vitrine/assets/fonts/nunito-sans-2.woff2) format('woff2'); }
+    @font-face { font-family: 'Caveat'; font-weight: 600 700; font-display: swap; src: url(loja-vitrine/assets/fonts/caveat.woff2) format('woff2'); }
+    :root { --tinta: #2b2340; --suave: #6b6380; --roxo: #7b4bd1; --rosa: #ec5b97; --verde: #3dbe6b; --linha: rgba(43, 35, 64, .12); }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; font: 400 17px/1.6 'Nunito Sans', system-ui, sans-serif; color: var(--tinta); background: #fffdf8; overflow-x: hidden; }
+    .mancha { position: fixed; border-radius: 50%; filter: url(#tinta); opacity: .5; mix-blend-mode: multiply; pointer-events: none; z-index: 0; }
+    .m1 { width: 520px; height: 520px; right: -120px; top: -140px; background: radial-gradient(circle, rgba(249, 198, 35, .8), rgba(249, 198, 35, .25) 60%, transparent 72%); }
+    .m2 { width: 420px; height: 420px; left: -140px; bottom: -120px; background: radial-gradient(circle, rgba(236, 91, 151, .7), rgba(236, 91, 151, .2) 60%, transparent 72%); }
+    .m3 { width: 300px; height: 300px; left: 40%; top: 50%; background: radial-gradient(circle, rgba(45, 156, 219, .6), rgba(45, 156, 219, .2) 60%, transparent 72%); opacity: .3; }
+    main { position: relative; z-index: 1; width: min(1040px, 100% - 32px); margin: 0 auto; padding: 48px 0 40px; text-align: center; }
+    .logo { width: 170px; margin: 0 auto 10px; display: block; }
+    .mao { font: 700 34px 'Caveat', cursive; color: var(--rosa); display: inline-block; transform: rotate(-3deg); }
+    h1 { font: 600 clamp(36px, 6vw, 60px)/1.05 'Fredoka', sans-serif; margin: 4px 0 12px; letter-spacing: -.02em; }
+    .sub { color: var(--suave); max-width: 620px; margin: 0 auto 36px; }
+    .opcoes { display: grid; gap: 20px; text-align: left; }
+    @media (min-width: 800px) { .opcoes { grid-template-columns: 1fr 1fr; } }
+    a.opcao { display: flex; flex-direction: column; gap: 12px; padding: 30px 28px; background: #fff; border-radius: 34px 40px 30px 44px; box-shadow: 0 3px 0 var(--linha), inset 0 0 0 2px var(--linha); text-decoration: none; color: inherit; transition: transform .15s; }
+    a.opcao:hover { transform: rotate(-1deg) translateY(-4px); }
+    .icone { width: 64px; height: 64px; border-radius: 20px 24px 18px 26px; display: flex; align-items: center; justify-content: center; color: #fff; }
+    .icone svg { width: 34px; height: 34px; }
+    .opcao--loja .icone { background: var(--roxo); }
+    .opcao--vitrine .icone { background: #25d366; }
+    .tag { align-self: flex-start; font: 700 13px 'Nunito Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; background: #f1ebff; color: var(--roxo); }
+    .opcao--vitrine .tag { background: #e6f7ef; color: #12823e; }
+    h2 { font: 600 30px/1.1 'Fredoka', sans-serif; margin: 0; }
+    ul { margin: 0; padding-left: 20px; color: var(--suave); }
+    li { margin: 2px 0; }
+    .bt { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 18px 22px 16px 24px; background: var(--roxo); color: #fff; font: 600 17px 'Fredoka', sans-serif; box-shadow: 0 4px 0 rgba(43, 35, 64, .18); }
+    .opcao--vitrine .bt { background: #25d366; }
+    footer { margin-top: 36px; font-size: 14px; color: var(--suave); }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="tinta" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="7" result="r"/>
+      <feDisplacementMap in="SourceGraphic" in2="r" scale="38" xChannelSelector="R" yChannelSelector="G" result="b"/>
+      <feGaussianBlur in="b" stdDeviation="3"/>
+    </filter>
+  </svg>
+  <span class="mancha m1"></span><span class="mancha m2"></span><span class="mancha m3"></span>
+
+  <main>
+    <img class="logo" src="logo.png" alt="Aquarela Moda Infantil e Juvenil">
+    <span class="mao">duas ideias para a Aquarela</span>
+    <h1>Qual site combina mais com vocês?</h1>
+    <p class="sub">O mesmo visual de aquarela, com dois jeitos de vender. Toque em cada um para navegar como se fosse cliente.</p>
+
+    <div class="opcoes">
+      <a class="opcao opcao--loja" href="loja-shopify/index.html">
+        <span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+        <span class="tag">Opção 1 · Loja Shopify</span>
+        <h2>Loja online completa</h2>
+        <ul>
+          <li>A cliente compra sozinha, 24 horas por dia</li>
+          <li>Sacola, Pix com desconto, cartão em até 6x e boleto</li>
+          <li>Retirada grátis na loja da Rua Velha, 348</li>
+          <li>Conta do cliente, frete por CEP e páginas por categoria com filtros</li>
+        </ul>
+        <span class="bt">Ver a loja →</span>
+      </a>
+      <a class="opcao opcao--vitrine" href="loja-vitrine/index.html">
+        <span class="icone"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3Zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.2-3.8 1.2 1.2-3.7-.3-.4a10.5 10.5 0 0 1-1.7-5.8C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.4 16 26.4Z"/></svg></span>
+        <span class="tag">Opção 2 · Site vitrine</span>
+        <h2>Vitrine com pedido no Zap</h2>
+        <ul>
+          <li>Catálogo bonito, sem carrinho e sem pagamento no site</li>
+          <li>A cliente monta a lista e manda pronta no WhatsApp</li>
+          <li>Botões para a Shopee e o Mercado Livre</li>
+          <li>Mais barato de manter: sem plano mensal de loja</li>
+        </ul>
+        <span class="bt">Ver a vitrine →</span>
+      </a>
+    </div>
+    <footer>Prévia criada pela DigitalWorks para apresentação. Fotos de exemplo; preços e regras ilustrativos. Nenhum pedido ou pagamento é real.</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Segurança: só arquivos do próprio site; o mapa do Google entra só no clique. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; frame-src https://www.google.com; base-uri 'none'; form-action 'self'; object-src 'none'">
+  <title>Coleção · Aquarela Moda Infantil</title>
+  <meta name="description" content="Aquarela Moda Infantil, em Rio das Pedras (RJ). Escolha os looks, monte a sua lista e peça pelo WhatsApp, pela Shopee ou pelo Mercado Livre.">
+  <meta name="theme-color" content="#7b4bd1">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="assets/css/estilo.css?v=6">
+  <script src="assets/js/dados.js?v=1" defer></script>
+  <script src="assets/js/app.js?v=8" defer></script>
+</head>
+<body data-pagina="colecao">
+  <!-- filtro que dá borda de tinta às manchas -->
+  <svg width="0" height="0" class="vh" aria-hidden="true">
+    <filter id="tinta" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="7" result="ruido"/>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="38" xChannelSelector="R" yChannelSelector="G" result="borda"/>
+      <feGaussianBlur in="borda" stdDeviation="3"/>
+    </filter>
+    <linearGradient id="arco" x1="0" x2="1">
+      <stop offset="0" stop-color="#ef4136"/><stop offset=".2" stop-color="#f7801d"/><stop offset=".4" stop-color="#f9c623"/>
+      <stop offset=".6" stop-color="#3dbe6b"/><stop offset=".8" stop-color="#2d9cdb"/><stop offset="1" stop-color="#7b4bd1"/>
+    </linearGradient>
+  </svg>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="aviso"><strong>Vem pra Aquarela!</strong> Pix com 5% off · frete grátis acima de R$ 199 · retire grátis na Rua Velha, 348</div>
+
+  <header class="topo" id="topo"></header>
+
+  <main id="conteudo" class="wrap"><div id="colecao"></div></main>
+
+  <footer class="rodape" id="rodape"></footer>
+</body>
+</html>

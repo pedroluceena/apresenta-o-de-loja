@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedido confirmado – Aquarela</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="assets/checkout.css">
+  <style>:root { --azul: #7b4bd1; }</style>
+</head>
+<body>
+  <div class="demo-faixa">Página de demonstração · nenhum pagamento foi cobrado</div>
+  <header class="ck-topo"><div class="ck-topo__dentro"><a href="index.html"><img src="assets/img/logo.png" alt="Aquarela Moda Infantil" class="ck-logo"></a></div></header>
+  <div class="ck-grade">
+    <main class="ck-principal"><div style="width:100%;max-width:57rem" id="obg"></div></main>
+    <aside class="ck-resumo aberto ck-resumo--depois"><div class="ck-resumo__dentro"><ul class="ck-itens" id="itens"></ul><dl class="ck-totais" id="totais"></dl></div></aside>
+  </div>
+  <script src="assets/js/dados.js"></script>
+  <script src="assets/js/shopify-shim.js"></script>
+  <script>
+  (function () {
+    var VK = window.VK, L = window.LOJA, brl = VK.brl, esc = VK.esc, ped;
+    try { ped = JSON.parse(localStorage.getItem('aquarela-loja-pedido')); } catch (e) { }
+    if (!ped && window.name) { try { ped = JSON.parse(window.name); } catch (e) { } }
+    var alvo = document.getElementById('obg');
+    if (!ped) { alvo.innerHTML = '<h1>Nenhum pedido encontrado</h1><p><a href="index.html">Voltar para a loja</a></p>'; return; }
+    var t = ped.totais, check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5 9-10"/></svg>';
+    var pagamentoHtml = '';
+    if (ped.pagamento === 'pix') {
+      pagamentoHtml = '<div class="cartao-box"><h2>Pague com Pix para confirmar</h2><div class="pix-area"><canvas id="qr" width="180" height="180" aria-label="QR Code de demonstração"></canvas><div>' +
+        '<p>Abra o app do seu banco, escolha <strong>Pix &gt; Ler QR Code</strong> ou use o código copia e cola. Valor: <strong>' + brl(t.total) + '</strong>.</p>' +
+        '<p style="color:#707070;font-size:1.2rem">O código expira em 30 minutos. (QR Code de demonstração, não paga nada.)</p>' +
+        '<div class="pix-codigo"><input readonly id="pix-cod" value="00020126580014BR.GOV.BCB.PIX0136demo-aquarela-' + ped.numero + '5204000053039865406' + t.total.toFixed(2) + '5802BR5913VIVAKIDS BR6014RIO DE JANEIRO"><button id="copiar">Copiar</button></div></div></div></div>';
+    } else if (ped.pagamento === 'boleto') {
+      pagamentoHtml = '<div class="cartao-box"><h2>Boleto gerado</h2><p>Vencimento em 3 dias úteis. Valor: <strong>' + brl(t.total) + '</strong>.</p><div class="pix-codigo"><input readonly value="23793.38128 60082.837140 54000.063305 9 0000000' + Math.round(t.total * 100) + '"><button type="button" onclick="VK.toast(\'Na loja real, o boleto abre em PDF.\')">Ver boleto</button></div></div>';
+    } else {
+      pagamentoHtml = '<div class="cartao-box"><h2>Pagamento aprovado</h2><p>Cartão de crédito · ' + ped.parcelas + 'x de ' + brl(t.total / ped.parcelas) + ' sem juros.</p></div>';
+    }
+    var aprovado = ped.pagamento === 'cartao';
+    alvo.innerHTML =
+      '<div class="obg-cabeca"><div class="obg-check">' + check + '</div><div><small>Pedido #' + ped.numero + '</small><h1>Obrigado, ' + esc(ped.nome || 'cliente') + '!</h1></div></div>' +
+      pagamentoHtml +
+      '<div class="cartao-box"><h2>' + (aprovado ? 'Seu pedido está confirmado' : 'Aguardando pagamento') + '</h2><p>Você vai receber a confirmação em <strong>' + esc(ped.email) + '</strong> e os avisos de envio por WhatsApp.</p>' +
+      '<ul class="linha-tempo"><li class="feito">Pedido recebido</li><li class="' + (aprovado ? 'feito' : '') + '">Pagamento confirmado</li><li>' + (ped.retirada ? 'Pronto para retirada na loja' : 'Pedido enviado, com código de rastreio') + '</li><li>' + (ped.retirada ? 'Retirado' : 'Entregue') + '</li></ul></div>' +
+      '<div class="cartao-box"><h2>Detalhes do pedido</h2><div class="grade-dados">' +
+      '<div><h3>Contato</h3><p>' + esc(ped.email) + '</p></div>' +
+      '<div><h3>Pagamento</h3><p>' + ({ pix: 'Pix', cartao: 'Cartão de crédito', boleto: 'Boleto bancário' }[ped.pagamento]) + ' · ' + brl(t.total) + '</p></div>' +
+      '<div><h3>' + (ped.retirada ? 'Retirada' : 'Endereço de entrega') + '</h3><p>' + (ped.retirada ? esc(L.nome) + '<br>' + esc(L.endereco) : esc(ped.nome + ' ' + ped.sobrenome) + '<br>' + esc(ped.endereco).replace(/\n/g, '<br>')) + '</p></div>' +
+      '<div><h3>Método de frete</h3><p>' + esc(ped.frete.n) + ' · ' + esc(ped.frete.p) + '</p></div></div></div>' +
+      '<div class="obg-acoes"><span>Precisa de ajuda? <a href="https://wa.me/' + L.whatsapp + '?text=' + encodeURIComponent('Olá! Tenho uma dúvida sobre o pedido #' + ped.numero) + '" target="_blank" rel="noopener">Fale no WhatsApp</a></span><a class="ck-botao" href="index.html">Continuar comprando</a></div>';
+
+    document.getElementById('itens').innerHTML = ped.itens.map(function (i) {
+      var p = VK.produto(i.h); if (!p) return '';
+      return '<li class="ck-item"><span class="ck-item__img"><img src="' + VK.foto(p.img[0], 140, 140) + '" alt=""><span class="ck-item__qtd">' + i.q + '</span></span><span class="ck-item__nome">' + esc(p.t) + '<small>' + esc(p.opcao || 'Tamanho') + ': ' + esc(i.tam) + (i.bord ? ' · Bordado: "' + esc(i.bord.nome) + '"' : '') + '</small></span><span>' + brl(VK.carrinho.precoUnit(i) * i.q) + '</span></li>';
+    }).join('');
+    function lin(a, b, c) { return '<div><dt>' + a + '</dt><dd' + (c ? ' class="desconto"' : '') + '>' + b + '</dd></div>'; }
+    document.getElementById('totais').innerHTML = lin('Subtotal', brl(t.sub)) +
+      (t.kitDesc ? lin('Leve mais, pague menos', '− ' + brl(t.kitDesc), 1) : '') + (t.cupom ? lin('Cupom', '− ' + brl(t.cupom), 1) : '') + (t.pix ? lin('Pix (5% off)', '− ' + brl(t.pix), 1) : '') +
+      (t.presente ? lin('Embalagem de presente', brl(t.presente)) : '') +
+      lin('Frete', ped.frete.v ? brl(ped.frete.v) : 'Grátis') + '<div class="total"><dt>Total</dt><dd><small>BRL</small> ' + brl(t.total) + '</dd></div>';
+
+    // QR Code ilustrativo (padrão aleatório com os 3 quadrados de posição)
+    var cv = document.getElementById('qr');
+    if (cv) {
+      var g = cv.getContext('2d'), n = 29, s = 180 / (n + 4), seed = ped.numero;
+      function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+      g.fillStyle = '#fff'; g.fillRect(0, 0, 180, 180); g.fillStyle = '#000';
+      function marco(x, y) { g.fillRect((x + 2) * s, (y + 2) * s, 7 * s, 7 * s); g.fillStyle = '#fff'; g.fillRect((x + 3) * s, (y + 3) * s, 5 * s, 5 * s); g.fillStyle = '#000'; g.fillRect((x + 4) * s, (y + 4) * s, 3 * s, 3 * s); }
+      for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
+        var canto = (x < 8 && y < 8) || (x > n - 9 && y < 8) || (x < 8 && y > n - 9);
+        if (!canto && rnd() > 0.52) g.fillRect((x + 2) * s, (y + 2) * s, s + 0.3, s + 0.3);
+      }
+      marco(0, 0); marco(n - 7, 0); marco(0, n - 7);
+      document.getElementById('copiar').addEventListener('click', function () {
+        var c = document.getElementById('pix-cod'); c.select();
+        try { navigator.clipboard.writeText(c.value); } catch (e) { document.execCommand('copy'); }
+        VK.toast('Código Pix copiado!');
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

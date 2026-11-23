@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finalizar compra – Aquarela</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="assets/checkout.css">
+  <style>:root { --azul: #7b4bd1; }</style>
+</head>
+<body>
+  <div class="demo-faixa">Checkout de demonstração · nenhum dado é enviado e nenhum pagamento é cobrado</div>
+  <header class="ck-topo">
+    <div class="ck-topo__dentro">
+      <a href="index.html"><img src="assets/img/logo.png" alt="Aquarela Moda Infantil" class="ck-logo"></a>
+      <a href="index.html" class="ck-sacola" aria-label="Voltar para a loja">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <button class="ck-resumo-toggle" id="resumo-toggle" aria-expanded="false">
+    <span>Resumo do pedido <span class="seta">⌄</span></span><strong id="total-topo"></strong>
+  </button>
+
+  <div class="ck-grade">
+    <main class="ck-principal">
+      <form id="form" novalidate>
+        <section>
+          <div class="ck-titulo-linha"><h2>Contato</h2><a href="#" class="ck-link" data-aviso>Fazer login</a></div>
+          <div class="campo"><input id="email" type="email" placeholder=" " required autocomplete="email"><label for="email">E-mail</label></div>
+          <label class="check"><input type="checkbox" checked> Receber novidades e ofertas por e-mail</label>
+        </section>
+
+        <section>
+          <h2>Entrega</h2>
+          <div class="opcoes" id="tipo-entrega">
+            <label class="opcao ativa"><input type="radio" name="tipo" value="enviar" checked><span>Enviar</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></label>
+            <label class="opcao"><input type="radio" name="tipo" value="retirar"><span>Retirar na loja</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l1.5-5h15L21 9M3 9h18v11H3zM10 20v-5h4v5"/></svg></label>
+          </div>
+          <div id="bloco-endereco">
+            <div class="campo"><select id="pais"><option>Brasil</option></select><label for="pais">País/Região</label></div>
+            <div class="linha-2">
+              <div class="campo"><input id="nome" placeholder=" " required autocomplete="given-name"><label for="nome">Nome</label></div>
+              <div class="campo"><input id="sobrenome" placeholder=" " required autocomplete="family-name"><label for="sobrenome">Sobrenome</label></div>
+            </div>
+            <div class="campo"><input id="cpf" placeholder=" " inputmode="numeric" maxlength="14"><label for="cpf">CPF (opcional na demonstração)</label></div>
+            <div class="campo"><input id="cep" placeholder=" " inputmode="numeric" maxlength="9" required autocomplete="postal-code"><label for="cep">CEP</label></div>
+            <div class="linha-2 linha-2--larga">
+              <div class="campo"><input id="rua" placeholder=" " required autocomplete="address-line1"><label for="rua">Endereço</label></div>
+              <div class="campo"><input id="numero" placeholder=" " required><label for="numero">Número</label></div>
+            </div>
+            <div class="campo"><input id="complemento" placeholder=" "><label for="complemento">Complemento (opcional)</label></div>
+            <div class="linha-3">
+              <div class="campo"><input id="bairro" placeholder=" " required><label for="bairro">Bairro</label></div>
+              <div class="campo"><input id="cidade" placeholder=" " required autocomplete="address-level2"><label for="cidade">Cidade</label></div>
+              <div class="campo"><select id="uf" required><option value=""></option><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select><label for="uf">Estado</label></div>
+            </div>
+            <div class="campo"><input id="telefone" placeholder=" " inputmode="tel" autocomplete="tel"><label for="telefone">Telefone (para avisos do pedido no WhatsApp)</label></div>
+          </div>
+          <div id="bloco-retirada" hidden>
+            <div class="linha-2">
+              <div class="campo"><input id="nome-r" placeholder=" "><label for="nome-r">Nome</label></div>
+              <div class="campo"><input id="tel-r" placeholder=" " inputmode="tel"><label for="tel-r">Telefone</label></div>
+            </div>
+            <div class="caixa-info"><strong>Aquarela Moda Infantil · Rio das Pedras</strong><br>Rua Velha, 348 – Rio de Janeiro/RJ<br>Pronto para retirada em até 2 horas · <strong>Grátis</strong></div>
+          </div>
+        </section>
+
+        <section id="secao-frete">
+          <h2>Método de frete</h2>
+          <div class="opcoes-lista" id="fretes"><div class="caixa-cinza">Digite o CEP para ver os métodos de frete disponíveis.</div></div>
+        </section>
+
+        <section>
+          <h2>Pagamento</h2>
+          <p class="sub">Todas as transações são seguras e criptografadas.</p>
+          <div class="opcoes-lista" id="pagamentos">
+            <div class="pg ativo"><label class="pg__topo"><input type="radio" name="pg" value="pix" checked> <span>Pix <em class="tag-verde">5% de desconto</em></span><span class="pg__marca">PIX</span></label>
+              <span class="pg__corpo">Após clicar em "Finalizar pedido", você verá o QR Code para pagar no app do seu banco. A aprovação é na hora.</span></div>
+            <div class="pg"><label class="pg__topo"><input type="radio" name="pg" value="cartao"> <span>Cartão de crédito</span><span class="pg__marca">VISA · MASTER · ELO · AMEX</span></label>
+              <span class="pg__corpo">
+                <span class="caixa-gateway">🔒 Na loja real, os dados do cartão são digitados no ambiente seguro do gateway de pagamento (ex.: Mercado Pago ou Pagar.me). Nesta demonstração não há campos de cartão.</span>
+                <span class="campo"><select id="parcelas"></select><label for="parcelas">Parcelas</label></span>
+                
+              </span></div>
+            <div class="pg"><label class="pg__topo"><input type="radio" name="pg" value="boleto"> <span>Boleto bancário</span><span class="pg__marca">BOLETO</span></label>
+              <span class="pg__corpo">O boleto vence em 3 dias úteis. O pedido é enviado após a compensação (até 2 dias úteis).</span></div>
+          </div>
+        </section>
+
+        <p class="erro" id="erro" role="alert"></p>
+        <button class="ck-botao" id="finalizar" type="submit">Finalizar pedido</button>
+        <p class="ck-rodape-links"><a href="pagina.html?p=trocas">Política de reembolso</a><a href="pagina.html?p=envio">Envio</a><a href="pagina.html?p=privacidade">Privacidade</a><a href="pagina.html?p=termos">Termos de serviço</a></p>
+      </form>
+    </main>
+
+    <aside class="ck-resumo" id="resumo">
+      <div class="ck-resumo__dentro">
+        <ul class="ck-itens" id="itens"></ul>
+        <form class="cupom" id="cupom-form">
+          <div class="campo"><input id="cupom" placeholder=" "><label for="cupom">Código de desconto</label></div>
+          <button type="submit">Aplicar</button>
+        </form>
+        <p class="cupom-msg" id="cupom-msg">Teste o cupom <strong>BEMVINDO10</strong></p>
+        <dl class="ck-totais">
+          <div><dt>Subtotal</dt><dd id="subtotal"></dd></div>
+          <div id="linhas-extra" style="display:block;margin:0"></div>
+          <div><dt>Frete</dt><dd id="frete-valor">Digite o CEP</dd></div>
+          <div class="total"><dt>Total</dt><dd><small>BRL</small> <span id="total"></span></dd></div>
+        </dl>
+      </div>
+    </aside>
+  </div>
+
+  <script src="assets/js/dados.js"></script>
+  <script src="assets/js/shopify-shim.js"></script>
+  <script src="assets/checkout.js"></script>
+</body>
+</html>
